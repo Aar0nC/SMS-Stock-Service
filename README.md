@@ -1,2 +1,2 @@
 # SMS-Stock-Service
-Sends real time (delayed 10-15 minutes) stock data to subscriber list throughout the day.
+SMS chat bot service that sends stock and currency quotes to subscribers throughout the day.
