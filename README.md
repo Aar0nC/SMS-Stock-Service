@@ -8,5 +8,5 @@ Commit history is limited on the public repo of this project. Prior work lies hi
 __Important note__:
 This service requires several API and encryption keys to run (AWS, Twilio, and the currency exchange API). 
 
-###Adding yourself to the service###:
+### Adding yourself to the service:
 To use this service as a client, simply text 'SUBSCRIBE' to (647) 503-4867. Note that sending and receiving messages from this Toronto,ON number may incur SMS fees as specified by your carrier.
