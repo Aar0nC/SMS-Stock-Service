@@ -47,7 +47,8 @@ var getMarketData = co.wrap(function *getStockData(stockSymbols, currencySymbols
     for (let i = 0; i < stockSymbols.length; i++) {
         const stock = stockSymbols[i].symbol;
         let stockQuote = yield getStockQuote(stock);
-        marketDataString += stockSymbols[i].name + '(' + stockQuote.t.replace('.', '') + ')' + ': ' + stockQuote.l + '\n';
+        marketDataString += stockSymbols[i].name + '(' + stockQuote.t.replace('.', '') + ')' + ': ' + stockQuote.l +  '(' + stockQuote.cp
+        + '%)' + '\n';
     }
     for (let i = 0; i < currencySymbols.length; i++) {
         const currency = currencySymbols[i];

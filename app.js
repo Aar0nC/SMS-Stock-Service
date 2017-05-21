@@ -27,22 +27,22 @@ function publishCronMarketData(cronTimeStamp){
         subscriberListDAO.getSubscriberList().then(function(response) {
             console.log('Subscriber list succesfully fetched');
             subscriberList = response;
-            stockData.getMarketData(stockSymbols, currencySymbols).then(function(stockPrices){
-                console.log('Stock market data succesfully fetched');
-                subscriberList.forEach(function(subscriber) {
-                    console.log('Sending message to ' + subscriber.userName + ' ' + subscriber.phoneNumber);
-                    twilio.sendMessage({
-                        to: subscriber.phoneNumber,
-                        from: '6475034867',
-                        body: stockPrices
-                    }, function(err, data) {
-                        if (err) {
-                            console.log(err);
-                        }
-                        console.log("SMS succesfully sent to " + subscriber.phoneNumber);
-                        console.log("SMS ID is " + data.sid);
-                        console.log(data.body);
-                    });
+            return stockData.getMarketData(stockSymbols, currencySymbols)
+        }).then(function(stockPrices){
+            console.log('Stock market data succesfully fetched');
+            subscriberList.forEach(function(subscriber) {
+                console.log('Sending message to ' + subscriber.userName + ' ' + subscriber.phoneNumber);
+                twilio.sendMessage({
+                    to: subscriber.phoneNumber,
+                    from: '6475034867',
+                    body: stockPrices
+                }, function(err, data) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.log("SMS succesfully sent to " + subscriber.phoneNumber);
+                    console.log("SMS ID is " + data.sid);
+                    console.log(data.body);
                 });
             });
         }).catch(function(err) {
