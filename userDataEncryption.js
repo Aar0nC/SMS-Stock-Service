@@ -16,7 +16,7 @@ function decrypt(userData) {
     const decipher = crypto.createDecipher(algorithm, key);
     let plaintext = decipher.update(userData, 'hex', 'utf8');
     plaintext += decipher.final('utf8');
-    console.log("Decrypted user data: " + decrypted);
+    console.log("Decrypted user data: " + plaintext);
     return plaintext;
 }
 
