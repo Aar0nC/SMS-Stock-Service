@@ -14,7 +14,7 @@ const stockSymbols = [{name: 'DOW', symbol: 'INDEXDJX: .DJI'}, {name: 'S&P 500',
 
 const currencySymbols = ['CAD', 'GBP', 'EUR'];
 
-const prodCronTimeStamps = ['30 9 * * 1-7', '30 10 * * 1-7', '30 11 * * 1-7',  '30 12 * * 1-7', '30 13 * * 1-7', '30 14 * * 1-7', '30 15 * * 1-7', '30 16 * * 1-7'];
+const prodCronTimeStamps = ['30 9 * * 1-5', '30 12 * * 1-5', '30 16 * * 1-5'];
 
 prodCronTimeStamps.forEach(function(timeStamp) {
     publishCronMarketData(timeStamp);
