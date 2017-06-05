@@ -2,9 +2,10 @@
 
 const cronJob = require('cron').CronJob;
 const marketUpdate = require('./quotes/marketUpdate');
+require('./chat/twilioWebHook'); //initaties the webhook server
 
 const prodTimeStamp = '30 9,12,16 * * 1-5';
-const job = new CronJob({
+const job = new cronJob({
     cronTime: prodTimeStamp,
     onTick: function() {
         console.log('Cron job executing');

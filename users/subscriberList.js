@@ -94,7 +94,7 @@ var getSubscriber = co.wrap(function *getSubscriber(phoneNumber) {
         }
     };
 
-    const subscriber = yield dbWrapper.get(getSubscriberParams).catch(function(err) {
+    const subscriber = yield dbWrapper.getItem(getSubscriberParams).catch(function(err) {
         console.log(err);
     });
 
@@ -102,7 +102,9 @@ var getSubscriber = co.wrap(function *getSubscriber(phoneNumber) {
         throw new Error("Woah! You aren't subscribed yet");
     }
 
-    return subscriber.item;
+    subscriber.Item.phoneNumber = userDataEncryption.decrypt(subscriber.Item.phoneNumber);
+
+    return subscriber.Item;
 });
 
 module.exports = {

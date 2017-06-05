@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const twilioWrapper = require('./twilioWrapper');
 const subscriberList = require('./../users/subscriberList');
 const marketUpdate = require('./../quotes/marketUpdate');
+const chatStrings = require('./chatStrings');
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));

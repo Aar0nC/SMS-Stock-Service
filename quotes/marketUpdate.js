@@ -1,6 +1,6 @@
 'use strict';
 
-const subscriberList = require('./users/subscriberList');
+const subscriberList = require('./../users/subscriberList');
 const marketData = require('./marketData');
 const twilioWrapper = require('./../chat/twilioWrapper');
 const co = require('co');
@@ -12,12 +12,12 @@ var getUpdatesForAllSubscribers = co.wrap(function *getUpdatesForAllSubscribers(
         const subscriber = subscribers[i];
         const update = yield marketData.getMarketData(subscriber.stockSymbols, subscriber.currencySymbols);
         console.log('Stock market data succesfully fetched');
-        console.log('Sending message to ' + subscriber.userName + ' ' + subscriber.phoneNumber);
+        console.log('Sending message to ' + subscriber.userName);
         twilioWrapper.sendMessage(subscriber.phoneNumber, '6475034867', update);
     }
 });
 
-var getUpdateForSubscriber = co.wrap(function getUpdateForSubscriber(phoneNumber) {
+var getUpdateForSubscriber = co.wrap(function *getUpdateForSubscriber(phoneNumber) {
     const subscriber = yield subscriberList.getSubscriber(phoneNumber); //TODO: handle get subscriber exception throw
     const update = yield marketData.getMarketData(subscriber.stockSymbols, subscriber.currencySymbols);
     twilioWrapper.sendMessage(subscriber.phoneNumber, '6475034867', update);
