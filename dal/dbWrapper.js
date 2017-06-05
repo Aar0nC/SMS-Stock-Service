@@ -19,8 +19,13 @@ function deleteItem(deleteItemParams) {
     return db.delete(deleteItemParams).promise();
 }
 
+function getItem(getItemParams) {
+    return db.get(getItemParams).promise();
+}
+
 module.exports = {
     putItem,
     scanTable,
-    deleteItem
+    deleteItem,
+    getItem
 };

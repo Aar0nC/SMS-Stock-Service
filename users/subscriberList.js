@@ -1,6 +1,6 @@
 'use strict';
 
-const dbWrapper = require('./dbWrapper');
+const dbWrapper = require('./../dal/dbWrapper');
 const co = require('co');
 const userDataEncryption = require('./userDataEncryption');
 const TABLE_NAME = process.env.TABLE_NAME;
@@ -9,7 +9,26 @@ var addSubscriber = co.wrap(function *addSubscriber(phoneNumber, userName) {
     const encryptedPhoneNumber = userDataEncryption.encrypt(phoneNumber);
     const subscriberObject = {
         phoneNumber: encryptedPhoneNumber,
-        userName: userName
+        userName: userName,
+        stockSymbols: [
+            {
+                "name": "DOW",
+                "symbol": "INDEXDJX: .DJI"
+            },
+            {
+                "name": "S&P 500",
+                "symbol": "INDEXSP: .INX"
+            },
+            {
+                "name": "TSX/S&P",
+                "symbol": "INDEXTSI: OSPTX"
+            },
+            {
+                "name": "NASDAQ",
+                "symbol": "NASDAQ: NDAQ"
+            }
+        ],
+        currencySymbols: ["CAD", "GBP", "EUR"]
     };
 
     const addSubscriberParams = {
@@ -66,8 +85,29 @@ var getSubscriberList = co.wrap(function *getSubscriberList() {
     return subscriberList.Items;
 });
 
+var getSubscriber = co.wrap(function *getSubscriber(phoneNumber) {
+    const encryptedPhoneNumber = userDataEncryption.encrypt(phoneNumber);
+    const getSubscriberParams = {
+        TableName: TABLE_NAME,
+        Key: {
+            'phoneNumber': encryptedPhoneNumber
+        }
+    };
+
+    const subscriber = yield dbWrapper.get(getSubscriberParams).catch(function(err) {
+        console.log(err);
+    });
+
+    if (!subscriber.Item) {
+        throw new Error("Woah! You aren't subscribed yet");
+    }
+
+    return subscriber.item;
+});
+
 module.exports = {
     addSubscriber,
     removeSubscriber,
-    getSubscriberList
+    getSubscriberList,
+    getSubscriber
 };

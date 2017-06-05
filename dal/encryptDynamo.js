@@ -1,5 +1,5 @@
 const db = require('./dbWrapper');
-const crypto = require('./userDataEncryption');
+const crypto = require('./../users/userDataEncryption');
 const TABLE_NAME = process.env.TABLE_NAME;
 
 db.scanTable({TableName: TABLE_NAME}).then(function(response) {

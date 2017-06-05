@@ -17,11 +17,11 @@ var getStockQuote = co.wrap(function *getStockQuote(stockSymbol) {
     const urlString = url.format(urlObj);
     const data = yield http(urlString).catch(function (err) {
         console.log(err);
+        //throw new Error('Hmmm we couldn\'t find ' + stockSymbol + '. Please make sure you have the right symbol');
     });
     let response = new Buffer(data).toString('ascii');
     response = response.replace('//', '');
-    const stockQuote = JSON.parse(response)[0];
-    return stockQuote;
+    return JSON.parse(response)[0];
 });
 
 var getExchangeRate = co.wrap(function *getExchangeRate(currencySymbol) {
