@@ -33,7 +33,7 @@ var addSubscriber = co.wrap(function *addSubscriber(phoneNumber, userName) {
             },
             {
                 "name": "APPLE",
-                "symbol": "APPL"
+                "symbol": "AAPL"
             },
             {
                 "name": "FACEBOOK",
