@@ -29,7 +29,7 @@ var addSubscriber = co.wrap(function *addSubscriber(phoneNumber, userName) {
             },
             {
                 "name": "SHOPIFY",
-                "symbol": "TSE: SHOP"
+                "symbol": "TSE:SHOP"
             }
         ],
         currencySymbols: ["CAD", "GBP", "EUR"]
