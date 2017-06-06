@@ -38,6 +38,10 @@ var addSubscriber = co.wrap(function *addSubscriber(phoneNumber, userName) {
             {
                 "name": "FACEBOOK",
                 "symbol": "FB"
+            },
+            {
+                "name": "GOOGLE",
+                "symbol": "GOOGL"
             }
         ],
         currencySymbols: ["CAD", "GBP", "EUR"]
