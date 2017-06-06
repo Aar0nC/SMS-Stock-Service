@@ -26,6 +26,10 @@ var addSubscriber = co.wrap(function *addSubscriber(phoneNumber, userName) {
             {
                 "name": "NASDAQ",
                 "symbol": "NASDAQ: NDAQ"
+            },
+            {
+                "name": "SHOPIFY",
+                "symbol": "TSE: SHOP"
             }
         ],
         currencySymbols: ["CAD", "GBP", "EUR"]

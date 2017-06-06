@@ -9,7 +9,10 @@ const marketUpdate = require('./../quotes/marketUpdate');
 const chatStrings = require('./chatStrings');
 
 const app = express();
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: 'application/json'}));
 
 app.post('/sms', function(req, res) {
     const message = req.body;
@@ -42,7 +45,9 @@ app.post('/sms', function(req, res) {
     } else if (messageValue === 'commands') {
         twilioWrapper.sendReply(res, chatStrings.commands);
     } else if (messageValue === 'update') {
-        marketUpdate.getUpdateForSubscriber(message.From).catch(function(err) {
+        marketUpdate.getUpdateForSubscriber(message.From).then(function() {
+            res.end();
+        }).catch(function(err) {
             twilioWrapper.sendReply(err.message);
         });
     } else {
@@ -53,3 +58,5 @@ app.post('/sms', function(req, res) {
 http.createServer(app).listen(1337, function () {
     console.log("Express server listening on port 1337");
 });
+
+module.exports = app;
